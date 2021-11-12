@@ -25,8 +25,13 @@ export const GameDetails = (props) => {
                         <div className="game__payTime">play time {game.play_time} hours</div>
                         <div className="game__age">age recommendation {game.age_recommendation} years old</div>
                         {
-                            cats.map(cat => (
-                                <div className='categories'>categories {cat.label}</div>
+                            game?.categories?.map(cat => (
+                                <div className='categories'>categories: {cat.label}</div>
+                            ))
+                        }
+                        {
+                            game?.reviews?.map(item => (
+                                <div className='review'>reviews: <Link>{item.title}</Link></div>
                             ))
                         }
                         <Link to={`${game.id}/review`}>Review Game</Link> <br></br>
