@@ -56,7 +56,7 @@ export const GameForm = () => {
             </div>
             <div>
                 <label>Categories</label>
-                <select type="number" name="category"  onChange={(event) => handleOnChange(event)}>
+                <select type="number" name="categoryId"  onChange={(event) => handleOnChange(event)}>
                     <option value='0'>Select a Category</option>
                     {
                         categories.map(category => <option value={category.id}>{category.label}</option>)
