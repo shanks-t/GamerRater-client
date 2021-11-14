@@ -70,7 +70,7 @@ export const GameDetails = (props) => {
                         }
                         <br></br>
                         <Link to={`${game.id}/review`}>Review Game</Link> <br></br>
-                        <Link to={`games/edit/${game.id}`}>Edit Game</Link>
+                        <Link to={`edit/${game.id}`}>Edit Game</Link>
                         <div>
                             <input type='range' min='1' max='10' defaultValue='10' onChange={(event) => getRatingsState(event)}></input>
                             {ratingObj.rating ?
