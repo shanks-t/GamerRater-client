@@ -13,6 +13,7 @@ export const GameDetails = (props) => {
 
     useEffect(() => {
         console.log('game', game)
+        console.log('id', gameId)
     }, [game]);
 
     const getRatingsState = (event) => {
@@ -39,8 +40,8 @@ export const GameDetails = (props) => {
                             ))
                         }
                         {
-                            game?.reviews?.map(item => (
-                                <div className='review'>reviews: <Link>{item.title}</Link></div>
+                            game?.reviews?.map(review => (
+                                <div className='review'>reviews: <Link to={`reviews/${review.id}`}>{review.title}</Link></div>
                             ))
                         }
                         <Link to={`${game.id}/review`}>Review Game</Link> <br></br>
