@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react"
 import { Link, useParams, useHistory } from "react-router-dom"
-import { getGame } from "./GameManager.js"
+import { getGame, addRating } from "./GameManager.js"
 
 export const GameDetails = (props) => {
-    const [ cats, setCats ] = useState([])
     const [game, setGameState] = useState({})
+    const [ rating, setRating ] = useState(0)
     const  { gameId } = useParams()
 
     useEffect(() => {
@@ -13,9 +13,18 @@ export const GameDetails = (props) => {
 
     useEffect(() => {
         console.log('game', game)
-        getGame(gameId).then(data => setCats(data.categories))
     }, [game]);
 
+    const getRatingsState = (event) => {
+        const newRating = event.target.value
+        setRating(newRating)
+    }
+
+    const submitRating = (event) => {
+        event.preventDefault()
+        
+        addRating(gameId, rating)
+    }
     return (
         <article className="games">
             {
@@ -36,6 +45,13 @@ export const GameDetails = (props) => {
                         }
                         <Link to={`${game.id}/review`}>Review Game</Link> <br></br>
                         <Link to={`games/edit/${game.id}`}>Edit Game</Link>
+                        <div>
+                            <input type='range' min='1' max='10' onChange={(event) => getRatingsState(event)}></input>
+                            <p>Rating: {rating}</p>
+                            <button onClick={(event) => {
+                                submitRating(event)
+                            }}>Submit Rating for {game.title}</button>
+                        </div>
                     </section>
             }
         </article>
