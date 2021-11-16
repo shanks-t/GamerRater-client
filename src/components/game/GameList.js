@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react"
+import { Link, useHistory } from 'react-router-dom'
 import { getGames, deleteGame } from "./GameManager.js"
 
 export const GameList = (props) => {
     const [ games, setGames ] = useState([])
-
+    const history = useHistory()
     const gameFetcher = () => {
         getGames(). then(gameData => setGames(gameData))
     }
@@ -19,19 +20,16 @@ export const GameList = (props) => {
         <>
         
         <article className="games">
-        
+        <button onClick={()=>history.push('games/create')}>Register New Game</button>
+        <ul>
         {
                 games.map(game => {
-                    return <section key={`game--${game.id}`} className="game">
-                        <h3 className="game__title">{game.title} by {game.designer}</h3>
-                        <ul>
-                        <li className="game__players">released: {game.year_released}</li>
-                        <li className="game__skillLevel">age recommendation: {game.age_recommendation}</li>
-                        <li className="game__skillLevel">play time: {game.play_time}</li>
-                        </ul>
-                </section>
+                    return <li key={`game--${game.id}`} className="game">
+                        <Link to={`games/${game.id}`}>{game.title}</Link>
+                </li>
             })
         }
+        </ul>
     </article>
 
     </>
